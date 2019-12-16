@@ -56,7 +56,6 @@ const theme = createMuiTheme({
 const useStyles = makeStyles(theme => ({
   root: {
     height: '100vh',
-    color:'primary'
   },
   image: {
     backgroundImage: 'url(https://www.facebook.com/profile.php?id=968644763193154&ref=br_rs)',
@@ -71,8 +70,6 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    backgroundColor: '#091626',
-    color: 'white',
   },
   avatar: {
     margin: theme.spacing(1),
@@ -90,9 +87,6 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(3, 0, 2),
     color:'white'
   },
-  grid: {
-    backgroundColor: '#091626',
-  }
 }));
 
 export default function SignInSide() {
@@ -103,7 +97,7 @@ export default function SignInSide() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square className={classes.grid}>
+      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square >
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
@@ -120,7 +114,6 @@ export default function SignInSide() {
               label="Email Address"
               id="email"
               name="email"
-              defaultValue="Email Address"
               autoComplete="email"
               color='secondary'
               autoFocus
