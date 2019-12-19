@@ -1,53 +1,59 @@
 import React from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
-import Paper from '@material-ui/core/Paper';
-import Box from '@material-ui/core/Box';
-import Grid from '@material-ui/core/Grid';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import {Gallery, GalleryImage } from 'react-gesture-gallery';
 import { createMuiTheme } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import { ThemeProvider } from '@material-ui/styles';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import TextField from '@material-ui/core/TextField';
+import MenuItem from '@material-ui/core/MenuItem';
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="white" align="center">
-      {'DTU @'}
-      <Link color="inherit" href="https://www.facebook.com/aahvaandtu/?__tn__=%2Cd%2CP-R&eid=ARDEHPgG-cNSKuT5o1YDNb0xoykc6e7ydyMtXa2b5b0wL3kLUMgaoWG-Dz-ZOgte_tD4sUTu9SitCUpj">
-        AAHVAAN
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+const events = [
+  {
+    value: '1',
+    label: 'EVENT 1',
+  },
+  {
+    value: '2',
+    label: 'EVENT 2',
+  },
+  {
+    value: '3',
+    label: 'EVENT 1',
+  },
+  {
+    value: '4',
+    label: 'EVENT 1',
+  },
+];
 
-const styles = {
-  floatingLabelFocusStyle: {
-      color: "#D98825"
-  }
-}
-
+const images = [
+  'http://www.icons101.com/icon_png/size_256/id_76704/Google_Settings.png',
+  'http://www.icons101.com/icon_png/size_256/id_80975/GoogleInbox.png',
+  'http://www.icons101.com/icon_png/size_256/id_79394/youtube.png',
+];
 
 const theme = createMuiTheme({
   palette: {
     primary: {
       // light: will be calculated from palette.primary.main,
-      main: '#F2F2F2',
+      main: '#D98825',
       // dark: will be calculated from palette.primary.main,
-      contrastText: '#F2F2F2',
+      // contrastText: will be calculated to contrast with palette.primary.main
     },
     secondary: {
       light: '#F2B84B',
       main: '#D98825',
       // dark: will be calculated from palette.secondary.main,
-      contrastText: '#F2F2F2',
+      contrastText: '#ffcc00',
     },
     // error: will use the default color
   },
@@ -55,116 +61,161 @@ const theme = createMuiTheme({
 
 const useStyles = makeStyles(theme => ({
   root: {
-    height: '100vh',
+    flexGrow: 1,
   },
-  image: {
-    backgroundImage: 'url(https://www.facebook.com/profile.php?id=968644763193154&ref=br_rs)',
-    backgroundRepeat: 'no-repeat',
-    backgroundColor:
-      theme.palette.type === 'dark' ? theme.palette.grey[900] : theme.palette.grey[50],
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+  },
+  card: {
+    minWidth: 275,
+  },
+  cardbullet: {
+    display: 'inline-block',
+    margin: '0 2px',
+    transform: 'scale(0.8)',
+  },
+  cardtitle: {
+    fontSize: 14,
+  },
+  cardpos: {
+    marginBottom: 12,
+  },
+  gridroot: {
+    flexGrow: 1,
+    overflow: 'hidden',
+    padding: theme.spacing(0, 3),
   },
   paper: {
-    margin: theme.spacing(8, 4),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    maxWidth: 700,
+    margin: `${theme.spacing(1)}px auto`,
+    padding: theme.spacing(2),
   },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+  registerpaper: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
   },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-    boederRadius: '0%',
-    borderColor: 'primary',
-    color:'secondary',
-    
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-    color:'white'
+  eventroot: {
+    '& .MuiTextField-root': {
+      margin: theme.spacing(1),
+      width: 200,
+    },
   },
 }));
 
-export default function SignInSide() {
+export default function ButtonAppBar() {
+  const[index,setIndex] = React.useState(0)
   const classes = useStyles();
+  const [events, setEvents] = React.useState('1');  
+
+  const handleChange = event => {
+    setEvents(events.target.value);
+  };
+
+
+  React.useEffect(() => {
+    const timer = setInterval(() => {
+      if (index === 2) {
+        setIndex(0);
+      } else {
+        setIndex(prev => prev + 1);
+      }
+    }, 3000);
+    return () => clearInterval(timer);
+  }, [index]);
 
   return (
-    <Grid container component="main" className={classes.root}>
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Grid item xs={false} sm={4} md={7} className={classes.image} />
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square >
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5" >
-            Register
+    <ThemeProvider>
+    <div className={classes.root}>
+      <AppBar position="sticky" color='secondary'>
+        <Toolbar>
+          <Typography variant="h5" className={classes.title} align='center'>
+            AAHVAAN
           </Typography>
-          <form className={classes.form} noValidate>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              label="Email Address"
-              id="email"
-              name="email"
-              autoComplete="email"
-              color='secondary'
-              autoFocus
-             ><InputLabel color="primary">Email Address</InputLabel></TextField>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              color='secondary'
-              InputLabelProps={{
-                className: classes.floatingLabelFocusStyle,
-            }}
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="secondary" />}
-              label="Remember me"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color='secondary'
-              className={classes.submit}
-            >
-              Proceed
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="https://www.facebook.com/aahvaandtu/?__tn__=%2Cd%2CP-R&eid=ARDEHPgG-cNSKuT5o1YDNb0xoykc6e7ydyMtXa2b5b0wL3kLUMgaoWG-Dz-ZOgte_tD4sUTu9SitCUpj" variant="body2">
-                  Queries? Contact
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="#" variant="body2" >
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
-            <Box mt={5}>
-              <Copyright />
-            </Box>
-          </form>
-        </div>
-      </Grid>
-      </ThemeProvider>
+        </Toolbar>
+      </AppBar>
+    </div>
+    <Paper>
+      <Gallery
+        style={{
+          background: "grey",
+          height: "90vh",
+          width: '100%'
+        }}
+        index={index}
+        onRequestChange={i => {
+          setIndex(i);
+        }}
+      >
+        {images.map(image => (
+          <GalleryImage objectFit="contain" key={image} src={image} />
+        ))}
+      </Gallery>
+    </Paper>
+    <div className={classes.root}>
+      <AppBar position="sticky" color='secondary'>
+        <Toolbar>
+          <Typography variant="h5" className={classes.title} align='center'>
+            REGISTER
+          </Typography>
+        </Toolbar>
+      </AppBar>
+    </div>
+
+    <Grid container spacing={3}>
+        <Grid item xs={6}>
+          <Paper className={classes.registerpaper}>
+          <div className={classes.root}>
+            <AppBar position="relative" color='secondary'>
+              <Toolbar>
+                <Typography variant="h5" className={classes.title} align='center'>
+                  SINGLE
+                </Typography>
+              </Toolbar>
+            </AppBar>
+          </div>
+          
+          </Paper>
+        </Grid>
+        <Grid item xs={6}>
+          <Paper className={classes.registerpaper}>
+          <div className={classes.root}>
+              <AppBar position="relative" color='secondary'>
+                <Toolbar>
+                  <Typography variant="h5" className={classes.title} align='center'>
+                    TEAM
+                  </Typography>
+                </Toolbar>
+              </AppBar>
+            </div>
+          </Paper>
+        </Grid>
     </Grid>
+
+    <Paper>
+      <Card className={classes.card}>
+        <CardContent>
+          <Typography className={classes.title} color="textSecondary" gutterBottom>
+            Delhi Technological University
+          </Typography>
+          <Typography variant="h5" component="h2" color="textSecondary">
+            AAHVAAN
+          </Typography>
+          <Typography className={classes.pos} color="textSecondary">
+            @aahvaan
+          </Typography>
+          <Typography variant="body2" component="p" color="textSecondary">
+            THIS IS FOOTER
+            <br />
+            {'"sports spirit"'}
+          </Typography>
+        </CardContent>
+        </Card>   
+      </Paper>
+    </ThemeProvider>
   );
 }
+
