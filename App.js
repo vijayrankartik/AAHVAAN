@@ -15,31 +15,11 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
-
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
-
-const events = [
-  {
-    value: '1',
-    label: 'EVENT 1',
-  },
-  {
-    value: '2',
-    label: 'EVENT 2',
-  },
-  {
-    value: '3',
-    label: 'EVENT 1',
-  },
-  {
-    value: '4',
-    label: 'EVENT 1',
-  },
-];
 
 const images = [
   'http://www.icons101.com/icon_png/size_256/id_76704/Google_Settings.png',
@@ -110,6 +90,9 @@ const useStyles = makeStyles(theme => ({
       width: 200,
     },
   },
+  TextField: {
+    margin: 10,
+  },
 }));
 
 export default function ButtonAppBar() {
@@ -156,8 +139,8 @@ export default function ButtonAppBar() {
               </AppBar>
               
               <form className={classes.root} noValidate autoComplete="off">
-                <TextField id="name-single" label="Name" variant="outlined" fullWidth={true} />
-                <TextField id="id-single" label="Id" variant="outlined" fullWidth={true} />
+                <TextField id="name-single" label="Name" variant="outlined" className={classes.TextField} fullWidth={true} />
+                <TextField id="id-single" label="Id" variant="outlined" fullWidth={true} className={classes.TextField}/>
                 {/*Dropdopwn for events*/}
                 <InputLabel id="mutiple-event-label">Events</InputLabel>
                 <Select
@@ -176,7 +159,7 @@ export default function ButtonAppBar() {
                   ))}
                 </Select>
                 {/*-------------------*/}
-                <TextField id="college-single" label="College" variant="outlined" fullWidth={true} />
+                <TextField id="college-single" label="College" variant="outlined" fullWidth={true} className={classes.TextField}/>
                 <FormControlLabel id="stay-single" control={<Checkbox value="checkedA" fullWidth={true} />}
                   label="Check here if you need accommodation"
                 />
@@ -201,9 +184,9 @@ export default function ButtonAppBar() {
                 </AppBar>
 
                 <form className={classes.root} noValidate autoComplete="off">
-                  <TextField id="name-team-leader" label="Name (Leader)" variant="outlined" fullWidth={true} />
+                  <TextField id="name-team-leader" label="Name (Leader)" variant="outlined" fullWidth={true} className={classes.TextField}/>
                   <TextField id="number-team-member" label="Members count (excluding leader)" variant="outlined" 
-                  type="number" InputProps={{ inputProps: { min: 1} }} fullWidth={true} value={additionalTeamMembers} onChange={handleTeamNumberChange} />
+                  type="number" InputProps={{ inputProps: { min: 1} }} fullWidth={true} value={additionalTeamMembers} onChange={handleTeamNumberChange} className={classes.TextField}/>
                   {generateNameFields(additionalTeamMembers)}
                   {/*Dropdopwn for events*/}
                   <InputLabel id="mutiple-event-label">Events</InputLabel>
@@ -223,8 +206,8 @@ export default function ButtonAppBar() {
                     ))}
                   </Select>
                   {/*-------------------*/}
-                  <TextField id="id-team" label="Id" variant="outlined" fullWidth={true} />
-                  <TextField id="college-team" label="College" variant="outlined" fullWidth={true} />
+                  <TextField id="id-team" label="Id" variant="outlined" fullWidth={true} className={classes.TextField}/>
+                  <TextField id="college-team" label="College" variant="outlined" fullWidth={true} className={classes.TextField} />
                   <FormControlLabel control={<Checkbox value="checkedA" fullWidth={true} />}
                     label="Check here if you need accommodation"
                   />
@@ -310,7 +293,7 @@ export default function ButtonAppBar() {
     </div>
 
     {/*---------My Changes-------------*/}
-    <Button variant="contained" color="secondary" onClick={handleRegisterTypeChange}>
+    <Button variant="contained" color="secondary" onClick={handleRegisterTypeChange} className={classes.TextField}>
       Register for {singleRegister ? 'team' : 'single player'} instead
     </Button>
     <Grid container spacing={0}>
