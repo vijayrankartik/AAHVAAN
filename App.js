@@ -20,6 +20,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
+import zIndex from '@material-ui/core/styles/zIndex';
 
 const images = [
   'http://www.icons101.com/icon_png/size_256/id_76704/Google_Settings.png',
@@ -54,6 +55,9 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     flexGrow: 1,
+    zIndex: 1,
+    color: 'white',
+    opcaity:1,
   },
   card: {
     minWidth: 275,
@@ -93,6 +97,26 @@ const useStyles = makeStyles(theme => ({
   TextField: {
     margin: 10,
   },
+  overlay: {
+    position:'absolute',
+    width: '100%',
+    height: '90vh',
+    backgroundColor:'black',
+    zIndex:1,
+    opacity:0.5,
+  },
+  textcontainer: {
+    padding: '16px 32px',
+    position: 'absolute',
+    marginLeft:650,
+    marginTop:300,
+    color: 'white',
+    border: 'solid',
+    borderColor:'white',
+    opcaity:1,
+    borderWidth: 'thick ',
+    zIndex: 2,
+  }
 }));
 
 export default function ButtonAppBar() {
@@ -265,12 +289,15 @@ export default function ButtonAppBar() {
         </Toolbar>
       </AppBar>
     </div>
+    <div className={classes.textcontainer}><Typography variant="h1" className={classes.title} align='center' color="textPrimary">AAHVAAN</Typography></div>
+    <div className={classes.overlay}>
+    </div>
     <Paper>
       <Gallery
         style={{
           background: "grey",
           height: "90vh",
-          width: '100%'
+          width: '100%',
         }}
         index={index}
         onRequestChange={i => {
@@ -278,7 +305,7 @@ export default function ButtonAppBar() {
         }}
       >
         {images.map(image => (
-          <GalleryImage objectFit="contain" key={image} src={image} />
+          <GalleryImage objectFit="contain" key={image} src={image} class="image"/>
         ))}
       </Gallery>
     </Paper>
