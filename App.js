@@ -184,9 +184,13 @@ export default function ButtonAppBar() {
                 </Select>
                 {/*-------------------*/}
                 <TextField id="college-single" label="College" variant="outlined" fullWidth={true} className={classes.TextField}/>
+                
+                
                 <FormControlLabel id="stay-single" control={<Checkbox value="checkedA" fullWidth={true} />}
                   label="Check here if you need accommodation"
-                />
+                /><br/>
+                <Button type="submit" variant="contained">Proceed</Button>            
+            
               </form>
             
             </div>
@@ -234,7 +238,8 @@ export default function ButtonAppBar() {
                   <TextField id="college-team" label="College" variant="outlined" fullWidth={true} className={classes.TextField} />
                   <FormControlLabel control={<Checkbox value="checkedA" fullWidth={true} />}
                     label="Check here if you need accommodation"
-                  />
+                  /><br />
+                  <Button type="submit" variant="contained">Proceed</Button>
                 </form>
               </div>
           </Paper>
@@ -274,6 +279,9 @@ export default function ButtonAppBar() {
     setChoosenEvents(event.target.value)
     console.log(choosenEvents)
     // console.log(event.target.value)
+
+
+
   };
 
   // ----------------END-------------------
@@ -353,3 +361,4 @@ export default function ButtonAppBar() {
     </ThemeProvider>    
   );
 }
+
